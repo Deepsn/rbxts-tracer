@@ -1,0 +1,29 @@
+{
+  "name": "@rbxts/tracer",
+  "version": "0.0.1",
+  "description": "",
+  "main": "out/init.lua",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "prepublishOnly": "pnpm run build"
+  },
+  "keywords": [],
+  "author": "Deepsn",
+  "license": "ISC",
+  "types": "out/index.d.ts",
+  "files": [
+    "out",
+    "!**/*.tsbuildinfo"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.2",
+    "@rbxts/compiler-types": "2.3.0-types.1",
+    "@rbxts/types": "^1.0.783",
+    "roblox-ts": "^2.3.0",
+    "typescript": "^5.5.2"
+  }
+}
