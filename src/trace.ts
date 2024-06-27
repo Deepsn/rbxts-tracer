@@ -49,13 +49,13 @@ export abstract class Trace {
   }
 
   public withTag(tag: string, queryParents = true) {
-    const objectsWithTag = CollectionService.GetTagged(tag);
+    const objectsWithTag = queryParents ? CollectionService.GetTagged(tag) : undefined;
     this.addFilter((result) => {
       if (!result.hit) return false;
       if (result.hit.HasTag(tag)) return false;
 
       // biome-ignore lint/style/noNonNullAssertion: result.hit was already checked
-      return !objectsWithTag.find((object) => result.hit!.IsDescendantOf(object));
+      return !objectsWithTag?.find((object) => result.hit!.IsDescendantOf(object));
     });
     return this;
   }
