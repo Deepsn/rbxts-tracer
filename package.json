@@ -4,18 +4,16 @@
   "description": "",
   "main": "out/init.lua",
   "scripts": {
-    "build": "rbxtsc",
     "watch": "rbxtsc -w",
+    "example:watch": "rbxtsc --type=game -p example -i example/include -w",
+    "example:serve": "rojo serve example/default.project.json",
     "prepublishOnly": "bun run build"
   },
   "keywords": [],
   "author": "Deepsn",
   "license": "ISC",
   "types": "out/index.d.ts",
-  "files": [
-    "out",
-    "!**/*.tsbuildinfo"
-  ],
+  "files": ["out", "!**/*.tsbuildinfo"],
   "publishConfig": {
     "access": "public"
   },

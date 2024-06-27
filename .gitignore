@@ -3,3 +3,5 @@
 /include
 *.tsbuildinfo
 /.idea
+/example/out
+/example/include
