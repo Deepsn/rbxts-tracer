@@ -5,8 +5,8 @@
   "main": "out/init.lua",
   "scripts": {
     "watch": "rbxtsc -w",
-    "example:watch": "rbxtsc --type=game -p example -i example/include -w",
-    "example:serve": "rojo serve example/default.project.json",
+    "test:watch": "rbxtsc --type=game -p test -i test/include -w",
+    "test:serve": "rojo serve test/default.project.json",
     "prepublishOnly": "bun run build"
   },
   "keywords": [],
