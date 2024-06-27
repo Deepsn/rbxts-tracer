@@ -9,11 +9,11 @@ export namespace Tracer {
     let direction: Vector3 | undefined;
     let length: number | undefined;
 
-    if (args.length === 1) {
+    if (args.size() === 1) {
       endPos = args[0];
     } else {
       direction = args[0];
-      endPos = args[0].add(startPos);
+      length = args[1];
     }
 
     if (endPos) {
