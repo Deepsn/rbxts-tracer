@@ -4,3 +4,4 @@
 *.tsbuildinfo
 /test/out
 /test/include
+*.tgz
