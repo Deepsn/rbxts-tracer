@@ -25,6 +25,7 @@
     "typescript": "^5.5.2"
   },
   "dependencies": {
-    "@rbxts/services": "^1.5.4"
+    "@rbxts/services": "^1.5.4",
+    "@rbxts/testez": "^0.4.2-ts.0"
   }
 }

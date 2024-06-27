@@ -2,6 +2,5 @@
 /out
 /include
 *.tsbuildinfo
-/.idea
 /test/out
 /test/include

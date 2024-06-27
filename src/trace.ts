@@ -5,7 +5,7 @@ export abstract class Trace {
   protected _filters: Filter[] = [];
 
   protected abstract _raycastParams?: RaycastParams;
-  protected _maxRaycasts = 1;
+  protected _maxRaycasts = -1;
 
   private _raycastsDone = 0;
 
@@ -60,6 +60,18 @@ export abstract class Trace {
     return this;
   }
 
+  public withoutTag(tag: string, queryParents = true) {
+    const objectsWithTag = queryParents ? CollectionService.GetTagged(tag) : undefined;
+    this.addFilter((result) => {
+      if (!result.hit) return false;
+      if (result.hit.HasTag(tag)) return true;
+
+      // biome-ignore lint/style/noNonNullAssertion: result.hit was already checked
+      return !!objectsWithTag?.find((object) => result.hit!.IsDescendantOf(object));
+    });
+    return this;
+  }
+
   public run(): TraceResult {
     const result = this._raycastFunc();
     const traceResult = {
@@ -72,11 +84,12 @@ export abstract class Trace {
 
     this._raycastsDone += 1;
 
-    if (this._raycastsDone < this._maxRaycasts) {
+    if (this._maxRaycasts < 0 || this._raycastsDone < this._maxRaycasts) {
       for (const filter of this._filters) {
         const shouldIgnore = filter(traceResult);
 
         if (shouldIgnore) {
+          print("ignoring", traceResult.hit);
           this.startPos = traceResult.position;
 
           return this.run();
