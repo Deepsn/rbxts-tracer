@@ -1,4 +1,5 @@
 import { Ray } from "./ray";
+import { Sphere } from "./sphere";
 
 function calculateDirection(startPos: Vector3, ...args: [Vector3, number?]) {
   const [vectorPos, length] = args;
@@ -12,5 +13,14 @@ export namespace Tracer {
   export function ray(startPos: Vector3, ...args: [Vector3, number?]): Ray {
     const direction = calculateDirection(startPos, ...args);
     return new Ray(startPos, direction);
+  }
+
+  export function sphere(radius: number, startPos: Vector3, endPos: Vector3): Sphere;
+  export function sphere(radius: number, startPos: Vector3, direction: Vector3, length: number): Sphere;
+  export function sphere(radius: number, startPos: Vector3, ...args: [Vector3, number?]): Sphere {
+    // Should be radius = 0 be allowed?
+    assert(radius >= 0, "Radius can't be negative");
+    const direction = calculateDirection(startPos, ...args);
+    return new Sphere(radius, startPos, direction);
   }
 }
