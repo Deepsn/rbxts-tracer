@@ -1,3 +1,4 @@
+import { Box } from "./box";
 import { Ray } from "./ray";
 import { Sphere } from "./sphere";
 
@@ -22,5 +23,12 @@ export namespace Tracer {
     assert(radius >= 0, "Radius can't be negative");
     const direction = calculateDirection(startPos, ...args);
     return new Sphere(radius, startPos, direction);
+  }
+
+  export function box(size: Vector3, startPos: Vector3, endPos: Vector3): Box;
+  export function box(size: Vector3, startPos: Vector3, direction: Vector3, length: number): Box;
+  export function box(size: Vector3, startPos: Vector3, ...args: [Vector3, number?]): Box {
+    const direction = calculateDirection(startPos, ...args);
+    return new Box(size, startPos, direction);
   }
 }
