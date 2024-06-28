@@ -1,8 +1,8 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { Tracer } from "@rbxts/tracer";
-import { END_POS, START_POS } from "../constants";
 import { createPart } from "utils/part-utils";
+import { END_POS, START_POS } from "../constants";
 import type { TraceResult } from "../types";
 
 export = () => {

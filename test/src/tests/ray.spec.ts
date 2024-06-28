@@ -1,8 +1,8 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import { Tracer } from "@rbxts/tracer";
-import { END_POS, POS_DIFF, START_POS } from "../constants";
 import { createPart } from "utils/part-utils";
+import { END_POS, POS_DIFF, START_POS } from "../constants";
 
 export = () => {
   it("should ray into nothing from start to end", () => {
