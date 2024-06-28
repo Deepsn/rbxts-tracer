@@ -4,6 +4,7 @@
   "description": "",
   "main": "out/init.lua",
   "scripts": {
+    "build": "rbxtsc",
     "watch": "rbxtsc -w",
     "test:watch": "rbxtsc --type=game -p test -i test/include -w",
     "test:serve": "rojo serve test/default.project.json",
