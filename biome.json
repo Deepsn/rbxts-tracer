@@ -13,5 +13,8 @@
     "rules": {
       "recommended": true
     }
+  },
+  "files": {
+    "ignore": ["out"]
   }
 }
