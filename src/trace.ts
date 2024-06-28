@@ -89,7 +89,6 @@ export abstract class Trace {
         const shouldIgnore = filter(traceResult);
 
         if (shouldIgnore) {
-          print("ignoring", traceResult.hit);
           this.startPos = traceResult.position;
 
           return this.run();
