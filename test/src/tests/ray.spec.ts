@@ -27,4 +27,8 @@ export = () => {
 
     expect(result.hit).to.equal(part);
   });
+
+  it("should error on incorrect arguments", () => {
+    expect(() => Tracer.ray(START_POS, undefined as unknown as Vector3)).to.throw();
+  });
 };
