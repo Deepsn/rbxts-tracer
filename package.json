@@ -1,9 +1,11 @@
 {
   "name": "@rbxts/tracer",
   "version": "0.0.1",
-  "description": "",
+  "description": "Raycast wrapper for Roblox",
   "main": "out/init.lua",
   "scripts": {
+    "lint:check": "biome check .",
+    "lint:fix": "biome check . --fix",
     "build": "rbxtsc",
     "watch": "rbxtsc -w",
     "test:watch": "rbxtsc --type=game -p test -i test/include -w",
