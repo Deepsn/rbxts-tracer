@@ -5,7 +5,7 @@ export class Sphere extends Trace {
   protected _raycastParams?: RaycastParams | undefined;
 
   constructor(
-    private radius: number,
+    private _radius: number,
     startPos: Vector3,
     direction: Vector3,
   ) {
@@ -13,6 +13,6 @@ export class Sphere extends Trace {
   }
 
   protected _raycastFunc(): RaycastResult | undefined {
-    return Workspace.Spherecast(this.startPos, this.radius, this.direction, this._raycastParams);
+    return Workspace.Spherecast(this.startPos, this._radius, this.direction, this._raycastParams);
   }
 }
