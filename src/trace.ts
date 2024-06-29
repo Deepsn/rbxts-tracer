@@ -36,7 +36,7 @@ export abstract class Trace {
     return this;
   }
 
-  public ignoreObject(object: BasePart | BasePart[]) {
+  public ignoreObject(object: Instance | Instance[]) {
     this._getRaycastParams().AddToFilter(object);
     return this;
   }

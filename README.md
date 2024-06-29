@@ -52,7 +52,7 @@ if (result.hit) {
 - **Ignoring Objects:** To ignore certain objects during your raycast, use the `ignoreObject` method.
 
 ```typescript
-ray.ignoreObject(somePart);
+ray.ignoreObject(someObject);
 ```
 
 - **Filtering by Tag:** You can include or exclude objects based on their tags using `withTag` or `withoutTag`.
