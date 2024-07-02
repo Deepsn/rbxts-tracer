@@ -17,7 +17,7 @@
     "url": "https://github.com/Deepsn/rbxts-tracer.git"
   },
   "author": "Deepsn",
-  "license": "ISC",
+  "license": "MIT",
   "types": "out/index.d.ts",
   "files": [
     "out",
