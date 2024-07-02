@@ -12,7 +12,10 @@
     "test:serve": "rojo serve test/default.project.json",
     "prepublishOnly": "bun run build"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Deepsn/rbxts-tracer.git"
+  },
   "author": "Deepsn",
   "license": "ISC",
   "types": "out/index.d.ts",
