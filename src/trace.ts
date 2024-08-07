@@ -25,31 +25,82 @@ export abstract class Trace {
     return this._raycastParams;
   }
 
+  /**
+   * Sets the raycast parameters for the raycast.
+   * @param raycastParams - The raycast parameters to use.
+   */
   public useRaycastParams(raycastParams: RaycastParams) {
     this._raycastParams = raycastParams;
     return this;
   }
 
+  /**
+   * Sets the max number of raycasts to perform.
+   *
+   * **Note:** You can set this to -1 to run infinite raycasts.
+   *  This is useful when you want to run a raycast until a certain condition is met.
+   *  But it could also be dangerous :sob:
+   *
+   * @example
+   * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1));
+   *
+   * ray.setMaxRaycasts(5);
+   *
+   * for (let i = 0; i < 7; i++) {
+   *    ray.run();
+   *    print(ray.position);
+   * }
+   *
+   * @param maxRaycasts - The max number of raycasts to perform.
+   */
   public setMaxRaycasts(maxRaycasts: number) {
     assert(maxRaycasts > 1, "Max raycasts should be higher than 1");
     this._maxRaycasts = maxRaycasts;
     return this;
   }
 
+  /**
+   * Ignores an object from the raycast.
+   * @example
+   * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1));
+   *
+   * ray.ignoreObject(workspace.Car);
+   *
+   * @param object - The object to ignore.
+   */
   public ignoreObject(object: Instance | Instance[] | undefined) {
     if (object) {
       this._getRaycastParams().AddToFilter(object);
     }
     return this;
   }
-
-  // Adds a filter function to filter array
-  // The filter function should return true if raycast should be ignored, and false/nothing to hit
+  /**
+   * Adds a filter function to the raycast.
+   *
+   * **Note:** The filter function should return true if the raycast should be ignored, and false/nothing to hit.
+   *
+   * @example
+   * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1))
+   *
+   * ray.addFilter(({ hit }) => !hit?.CanCollide || hit.Transparency > 0.75); // Will ignore objects that are not collidable or are transparent
+   * @param filter - The filter function to add.
+   */
   public addFilter(filter: Filter) {
     this._filters.push(filter);
     return this;
   }
 
+  /**
+   * Adds a filter to ignore objects with a specific tag.
+   * @example
+   *
+   * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1))
+   *
+   * ray.withTag("ally"); // Will ignore objects with the tag "ally"
+   *
+   * @param tag - The tag to ignore.
+   * @param queryParents - Whether to query parents of the object with the tag.
+   */
   public withTag(tag: string, queryParents = true) {
     const objectsWithTag = queryParents ? CollectionService.GetTagged(tag) : undefined;
     this.addFilter((result) => {
@@ -62,6 +113,17 @@ export abstract class Trace {
     return this;
   }
 
+  /**
+   * Adds a filter to ignore objects without a specific tag.
+   * @example
+   *
+   * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1))
+   *
+   * ray.withoutTag("enemy"); // Will ignore objects without the tag "enemy"
+   *
+   * @param tag - The tag to ignore.
+   * @param queryParents - Whether to query parents of the object with the tag.
+   */
   public withoutTag(tag: string, queryParents = true) {
     const objectsWithTag = queryParents ? CollectionService.GetTagged(tag) : undefined;
     this.addFilter((result) => {
@@ -74,6 +136,15 @@ export abstract class Trace {
     return this;
   }
 
+  /**
+   * Runs the raycast.
+   * @returns The trace result.
+   * @example
+   * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1));
+   * const result = ray.run();
+   *
+   * print(ray.position);
+   */
   public run(): TraceResult {
     const result = this._raycastFunc();
     const traceResult = {

@@ -13,6 +13,18 @@ export class Box extends Trace {
     super(startPos, endPos);
   }
 
+  /**
+   * Sets the rotation of the box.
+   * @example
+   *
+   * const box = Tracer.box(new Vector3(1, 1, 1), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
+   *
+   * box.setRotation(CFrame.Angles(40, 0, 0)); // Rotates the box 40 degrees on the x-axis
+   *
+   * box.run();
+   *
+   * @param cframe - The CFrame to set the rotation to.
+   */
   public setRotation(cframe: CFrame) {
     this._rotation = cframe;
     return this;
