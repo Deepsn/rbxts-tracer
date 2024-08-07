@@ -163,6 +163,9 @@ export abstract class Trace {
         if (shouldIgnore) {
           this.startPos = traceResult.position;
 
+          // Ignore hitted object
+          this.ignoreObject(traceResult.hit);
+
           return this.run();
         }
       }
