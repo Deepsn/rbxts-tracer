@@ -33,7 +33,9 @@ export namespace Tracer {
    * const endPos = new Vector3(1, 1, 1);
    * const ray = Tracer.ray(startPos, endPos);
    *
-   * ray.run() // Runs the raycast
+   * const result = ray.run(); // Runs the raycast
+   *
+   * print(result.position);
    *
    * @param {Vector3} startPos - The starting position vector.
    * @param {Vector3} endPos - The ending position vector.
@@ -49,7 +51,9 @@ export namespace Tracer {
    * const direction = new Vector3(1, 1, 1);
    * const ray = Tracer.ray(startPos, direction, 10);
    *
-   * ray.run() // Runs the raycast
+   * const result = ray.run(); // Runs the raycast
+   *
+   * print(result.position);
    *
    * @param {Vector3} startPos - The starting position vector.
    * @param {Vector3} direction - The direction vector.
@@ -73,7 +77,9 @@ export namespace Tracer {
    * // Creates a sphere with a radius of 1
    * const sphere = Tracer.sphere(1, startPos, endPos);
    *
-   * sphere.run() // Runs the spherecast
+   * const result = sphere.run(); // Runs the spherecast
+   *
+   * print(result.position);
    *
    * @param {number} radius - The radius of the sphere.
    * @param {Vector3} startPos - The starting position vector.
@@ -93,7 +99,9 @@ export namespace Tracer {
    * // Creates a sphere with a radius of 1
    * const sphere = Tracer.sphere(1, startPos, direction, 10);
    *
-   * sphere.run() // Runs the spherecast
+   * const result = sphere.run(); // Runs the spherecast
+   *
+   * print(result.position);
    *
    * @param {number} radius - The radius of the sphere.
    * @param {Vector3} startPos - The starting position vector.
@@ -124,7 +132,9 @@ export namespace Tracer {
    *
    * const box = Tracer.box(size, startPos, endPos);
    *
-   * box.run() // Runs the boxcast
+   * const result = box.run(); // Runs the boxcast
+   *
+   * print(result.position);
    *
    * @param {Vector3} size - The size of the box.
    * @param {Vector3} startPos - The starting position vector.
@@ -146,7 +156,9 @@ export namespace Tracer {
    *
    * const box = Tracer.box(size, startPos, direction, 10);
    *
-   * box.run() // Runs the boxcast
+   * const result = box.run(); // Runs the boxcast
+   *
+   * print(result.position);
    *
    * @param {Vector3} size - The size of the box.
    * @param {Vector3} startPos - The starting position vector.

@@ -46,10 +46,9 @@ export abstract class Trace {
    *
    * ray.setMaxRaycasts(5);
    *
-   * for (let i = 0; i < 7; i++) {
-   *    ray.run();
-   *    print(ray.position);
-   * }
+   * const result = ray.run();
+   *
+   * print(result.position);
    *
    * @param maxRaycasts - The max number of raycasts to perform.
    */
@@ -143,7 +142,7 @@ export abstract class Trace {
    * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1));
    * const result = ray.run();
    *
-   * print(ray.position);
+   * print(result.position);
    */
   public run(): TraceResult {
     const result = this._raycastFunc();
