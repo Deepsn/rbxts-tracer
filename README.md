@@ -2,6 +2,9 @@
 
 Tracer is a Raycast Wrapper that makes Raycasting so much easier, inspired by [S&Box Trace API](https://docs.facepunch.com/s/sbox-dev/doc/tracing-FI4tuMSbSF)
 
+> [!WARNING]
+> Tracer is under Development so anything could change without warnings! (until 1.0.0 releases)
+
 ## Features
 
 - Create traces with ease `Tracer.ray(startPos, endPos).run()` !
