@@ -162,7 +162,6 @@ export abstract class Trace {
   public run(): TraceResult {
     const distanceLeft = this._maxDistance > 0 ? this._maxDistance - this._distanceTravelled : DEFAULT_MAX_DISTANCE;
 
-    print(distanceLeft, this._maxDistance, this._distanceTravelled);
     if (this.direction.Magnitude > distanceLeft) {
       this.direction = this.direction.Unit.mul(distanceLeft);
     }
