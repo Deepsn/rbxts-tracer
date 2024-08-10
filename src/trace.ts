@@ -57,7 +57,7 @@ export abstract class Trace {
    * @param maxRaycasts - The max number of raycasts to perform.
    */
   public setMaxRaycasts(maxRaycasts: number) {
-    assert(maxRaycasts > 1 || maxRaycasts === -1, "Max raycasts should be higher than 1 or -1");
+    assert(maxRaycasts > 0 || maxRaycasts === -1, "Max raycasts should be higher than 1 or -1");
     this._maxRaycasts = maxRaycasts;
     return this;
   }
