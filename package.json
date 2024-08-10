@@ -19,10 +19,7 @@
   "author": "Deepsn",
   "license": "MIT",
   "types": "out/index.d.ts",
-  "files": [
-    "out",
-    "!**/*.tsbuildinfo"
-  ],
+  "files": ["out", "!**/*.tsbuildinfo"],
   "publishConfig": {
     "access": "public"
   },
