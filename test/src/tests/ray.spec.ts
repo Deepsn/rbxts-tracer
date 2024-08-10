@@ -31,4 +31,26 @@ export = () => {
   it("should error on incorrect arguments", () => {
     expect(() => Tracer.ray(START_POS, undefined as unknown as Vector3)).to.throw();
   });
+
+  it("should limit based on max distance", () => {
+    const endPos = END_POS.add(Vector3.yAxis.mul(500));
+
+    createPart(endPos);
+
+    const distance = 300;
+    const result = Tracer.ray(START_POS, endPos).setMaxDistance(distance).run();
+
+    expect(result.distance).to.equal(distance);
+    expect(result.hit).to.equal(undefined);
+    expect(result.position).to.equal(START_POS.add(Vector3.yAxis.mul(distance)));
+  });
+
+  it("shouldn't crash if a filter is added that ignores everything", () => {
+    const result = Tracer.ray(START_POS, END_POS)
+      .addFilter(() => true)
+      .run();
+
+    expect(result.hit).to.equal(undefined);
+    expect(result.distance).to.equal(3000);
+  });
 };

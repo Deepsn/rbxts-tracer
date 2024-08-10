@@ -37,4 +37,17 @@ export = () => {
   it("should error when radius is negative", () => {
     expect(() => Tracer.sphere(-10, START_POS, END_POS)).to.throw();
   });
+
+  it("should limit based on max distance", () => {
+    const endPos = END_POS.add(Vector3.yAxis.mul(500));
+
+    createPart(endPos);
+
+    const distance = 300;
+    const result = Tracer.sphere(radius, START_POS, endPos).setMaxDistance(distance).run();
+
+    expect(result.distance).to.equal(distance);
+    expect(result.hit).to.equal(undefined);
+    expect(result.position).to.equal(START_POS.add(Vector3.yAxis.mul(distance)));
+  });
 };

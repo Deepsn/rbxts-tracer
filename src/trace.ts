@@ -1,13 +1,18 @@
 import { CollectionService } from "@rbxts/services";
 import type { Filter, TraceResult } from "./types";
 
+const DEFAULT_MAX_RAYCASTS = -1;
+const DEFAULT_MAX_DISTANCE = 3000;
+
 export abstract class Trace {
   protected _filters: Filter[] = [];
 
   protected abstract _raycastParams?: RaycastParams;
-  protected _maxRaycasts = -1;
+  protected _maxRaycasts = DEFAULT_MAX_RAYCASTS;
+  protected _maxDistance = DEFAULT_MAX_DISTANCE;
 
   private _raycastsDone = 0;
+  private _distanceTravelled = 0;
 
   constructor(
     protected startPos: Vector3,
@@ -54,6 +59,17 @@ export abstract class Trace {
   public setMaxRaycasts(maxRaycasts: number) {
     assert(maxRaycasts > 1 || maxRaycasts === -1, "Max raycasts should be higher than 1 or -1");
     this._maxRaycasts = maxRaycasts;
+    return this;
+  }
+
+  /**
+   * Sets the max distance a Trace can travel
+   *
+   * @param maxDistance - The max distance a Trace can travel
+   */
+  public setMaxDistance(maxDistance: number) {
+    assert(maxDistance > 1, "Max distance should be higher than 1");
+    this._maxDistance = maxDistance;
     return this;
   }
 
@@ -144,6 +160,13 @@ export abstract class Trace {
    * print(result.position);
    */
   public run(): TraceResult {
+    const distanceLeft = this._maxDistance > 0 ? this._maxDistance - this._distanceTravelled : DEFAULT_MAX_DISTANCE;
+
+    print(distanceLeft, this._maxDistance, this._distanceTravelled);
+    if (this.direction.Magnitude > distanceLeft) {
+      this.direction = this.direction.Unit.mul(distanceLeft);
+    }
+
     const result = this._raycastFunc();
     const traceResult = {
       position: result?.Position ?? this.startPos.add(this.direction),
@@ -154,8 +177,15 @@ export abstract class Trace {
     };
 
     this._raycastsDone += 1;
+    this._distanceTravelled += traceResult.distance;
 
-    if (this._maxRaycasts < 0 || this._raycastsDone < this._maxRaycasts) {
+    // Update TraceResult distance with accumulated distance
+    traceResult.distance = this._distanceTravelled;
+
+    if (
+      (this._maxRaycasts < 0 || this._raycastsDone < this._maxRaycasts) &&
+      this._distanceTravelled < this._maxDistance
+    ) {
       for (const filter of this._filters) {
         const shouldIgnore = filter(traceResult);
 
