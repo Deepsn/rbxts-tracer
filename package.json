@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/tracer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Raycast wrapper for Roblox",
   "main": "out/init.lua",
   "scripts": {
@@ -19,7 +19,10 @@
   "author": "Deepsn",
   "license": "MIT",
   "types": "out/index.d.ts",
-  "files": ["out", "!**/*.tsbuildinfo"],
+  "files": [
+    "out",
+    "!**/*.tsbuildinfo"
+  ],
   "publishConfig": {
     "access": "public"
   },
