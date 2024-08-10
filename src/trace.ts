@@ -38,8 +38,7 @@ export abstract class Trace {
    * Sets the max number of raycasts to perform.
    *
    * **Note:** You can set this to -1 to run infinite raycasts.
-   *  This is useful when you want to run a raycast until a certain condition is met.
-   *  But it could also be dangerous :sob:
+   *  This is useful when you want to run a raycast until a certain condition is met
    *
    * @example
    * const ray = Tracer.ray(new Vector3(0, 0, 0), new Vector3(1, 1, 1));
@@ -53,7 +52,7 @@ export abstract class Trace {
    * @param maxRaycasts - The max number of raycasts to perform.
    */
   public setMaxRaycasts(maxRaycasts: number) {
-    assert(maxRaycasts > 1, "Max raycasts should be higher than 1");
+    assert(maxRaycasts > 1 || maxRaycasts === -1, "Max raycasts should be higher than 1 or -1");
     this._maxRaycasts = maxRaycasts;
     return this;
   }
