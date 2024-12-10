@@ -11,6 +11,7 @@ export function createPart(position: CFrame | Vector3, size?: Vector3) {
     part.CFrame = position;
   }
 
+  part.Anchored = true;
   part.Size = size ?? Vector3.one;
   part.BrickColor = BrickColor.random();
 

@@ -53,4 +53,16 @@ export = () => {
     expect(result.hit).to.equal(undefined);
     expect(result.distance).to.equal(3000);
   });
+
+  it("should hit the object even if it's inside another ignored object", () => {
+    const position = START_POS.add(POS_DIFF.div(2));
+    const ignoredPart = createPart(position, Vector3.one);
+    const hitPart = createPart(position, Vector3.one);
+
+    ignoredPart.AddTag("ignored");
+
+    const result = Tracer.ray(START_POS, END_POS).withoutTag("ignored").run();
+
+    expect(result.hit).to.equal(hitPart);
+  });
 };

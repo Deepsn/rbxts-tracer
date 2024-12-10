@@ -189,7 +189,12 @@ export abstract class Trace {
         const shouldIgnore = filter(traceResult);
 
         if (shouldIgnore) {
-          this.startPos = traceResult.position;
+          // This is needed to prevent the ray from not hitting objects that have the same position as the previous hit
+          // Could break if there is a object 0.0001 studs away from the previous hit
+          const offset = this.direction.Unit.mul(1e-4);
+
+          // Set the new start position to the previous hit position, so the ray could continue
+          this.startPos = traceResult.position.sub(offset);
 
           // Ignore hitted object
           this.ignoreObject(traceResult.hit);
